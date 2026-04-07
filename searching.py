@@ -66,24 +66,40 @@ def binary_search(sequence, target):
 
     return None
 
-def main():
-    # načtení seřazených dat
-    ordered_data = read_data("sequential.json", "ordered_numbers")
 
-    if ordered_data is None:
+def pattern_search(sequence, pattern):
+    """
+    Searches for all occurrences of a pattern in a sequence.
+    :param sequence: (str), DNA sequence
+    :param pattern: (str), searched pattern
+    :return: set of positions (indices)
+    """
+
+    positions = set()
+    seq_len = len(sequence)
+    pat_len = len(pattern)
+
+    for i in range(seq_len - pat_len + 1):
+        if sequence[i:i + pat_len] == pattern:
+            positions.add(i)
+
+    return positions
+
+
+def main():
+    dna_sequence = read_data("sequential.json", "dna_sequence")
+
+    if dna_sequence is None:
         print("Neplatný klíč.")
         return
 
-    target = 8
+    pattern = "ATA"  # hledaný vzor
 
-    index = binary_search(ordered_data, target)
+    result = pattern_search(dna_sequence, pattern)
 
-    print("Hledané číslo:", target)
-
-    if index is not None:
-        print("Nalezeno na indexu:", index)
-    else:
-        print("Číslo nebylo nalezeno.")
+    print("DNA sekvence:", dna_sequence)
+    print("Hledaný vzor:", pattern)
+    print("Pozice výskytu:", result)
 
 if __name__ == "__main__":
     main()
