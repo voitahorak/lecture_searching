@@ -14,11 +14,11 @@ def read_data(file_name, field):
 
     file_path = os.path.join(cwd_path, file_name)
 
-    # načtení JSON souboru
+    #načtení JSON souboru
     with open(file_path, "r") as fileseq:
         data = json.load(fileseq)
 
-    # ověření, že klíč existuje
+    #ověření, že klíč existuje
     if field not in data:
         return None
 
@@ -87,8 +87,7 @@ def pattern_search(sequence, pattern):
         for j in range(pat_len):
             if sequence[i + j] != pattern[j]:
                 match = False
-                break  # ← klíčová změna: ukončíme při první neshodě
-
+                break
         if match:
             positions.add(i)
 
@@ -102,7 +101,7 @@ def main():
         print("Neplatný klíč.")
         return
 
-    pattern = "ATA"  # hledaný vzor
+    pattern = "ATA"  #hledaný vzor dna sekvence??
 
     result = pattern_search(dna_sequence, pattern)
 
