@@ -70,6 +70,7 @@ def binary_search(sequence, target):
 def pattern_search(sequence, pattern):
     """
     Searches for all occurrences of a pattern in a sequence.
+    Stops comparison early on mismatch.
     :param sequence: (str), DNA sequence
     :param pattern: (str), searched pattern
     :return: set of positions (indices)
@@ -80,7 +81,15 @@ def pattern_search(sequence, pattern):
     pat_len = len(pattern)
 
     for i in range(seq_len - pat_len + 1):
-        if sequence[i:i + pat_len] == pattern:
+
+        match = True
+
+        for j in range(pat_len):
+            if sequence[i + j] != pattern[j]:
+                match = False
+                break  # ← klíčová změna: ukončíme při první neshodě
+
+        if match:
             positions.add(i)
 
     return positions
